@@ -13,16 +13,19 @@ const pool = new Pool({
 });
 
 const getTasks = async (req, res) => {
+    res.set('Access-Control-Allow-Origin', 'https://todo-list-app-gurdian.up.railway.app/');
     const response = await pool.query('SELECT * FROM task');
     res.status(200).json(response.rows);
 }
 
 const getTaskById = async (req, res) => {
+    res.set('Access-Control-Allow-Origin', 'https://todo-list-app-gurdian.up.railway.app/');
     const response = await pool.query('SELECT * FROM task WHERE id = $1', [req.params.id]);
     res.status(200).json(response.rows);
 }
 
 const createTask = async (req, res) => {
+    res.set('Access-Control-Allow-Origin', 'https://todo-list-app-gurdian.up.railway.app/');
     const { name, done } = req.body;
     await pool.query('INSERT INTO task(name, done) VALUES ($1, $2)', [name, done]);
     res.status(200).json({
@@ -31,6 +34,7 @@ const createTask = async (req, res) => {
 }
 
 const updateTask = async (req, res) => {
+    res.set('Access-Control-Allow-Origin', 'https://todo-list-app-gurdian.up.railway.app/');
     const { name, done } = req.body;
     const id = req.params.id;
     await pool.query('UPDATE task SET name=$1, done=$2 WHERE id = $3', [name, done, id]);
@@ -40,6 +44,7 @@ const updateTask = async (req, res) => {
 }
 
 const deleteTask = async (req, res) => {
+    res.set('Access-Control-Allow-Origin', 'https://todo-list-app-gurdian.up.railway.app/');
     const response = await pool.query('DELETE FROM task WHERE id = $1', [req.params.id]);
     res.status(200).json({
         message: 'Tarea eliminada correctamente.'
