@@ -26,7 +26,7 @@ const createTask = async (req, res) => {
     const { name, done } = req.body;
     await pool.query('INSERT INTO task(name, done) VALUES ($1, $2)', [name, done]);
     res.status(200).json({
-        message: 'User added succesfully'
+        message: 'Tarea creada correctamente.'
     });
 }
 
@@ -35,14 +35,14 @@ const updateTask = async (req, res) => {
     const id = req.params.id;
     await pool.query('UPDATE task SET name=$1, done=$2 WHERE id = $3', [name, done, id]);
     res.status(200).json({
-        message: 'User updated succesfully'
+        message: 'Tarea actualizada correctamente.'
     });
 }
 
 const deleteTask = async (req, res) => {
     const response = await pool.query('DELETE FROM task WHERE id = $1', [req.params.id]);
     res.status(200).json({
-        message: 'User deleted succesfully'
+        message: 'Tarea eliminada correctamente.'
     });
 }
 module.exports = {
