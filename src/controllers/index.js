@@ -22,7 +22,16 @@ const getTaskById = async (req, res) => {
     res.status(200).json(response.rows);
 }
 
+const createTask = async (req, res) => {
+    const { name, done } = req.body;
+    await pool.query('INSERT INTO task(name, done) VALUES ($1, $2)', [name, done]);
+    res.status(200).json({
+        message: 'User added succesfully'
+    });
+}
+
 module.exports = {
     getTasks,
-    getTaskById
+    getTaskById,
+    createTask
 }
