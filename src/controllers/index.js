@@ -17,6 +17,12 @@ const getTasks = async (req, res) => {
     res.status(200).json(response.rows);
 }
 
+const getTaskById = async (req, res) => {
+    const response = await pool.query('SELECT * FROM task WHERE id = $1', [req.params.id]);
+    res.status(200).json(response.rows);
+}
+
 module.exports = {
-    getTasks
+    getTasks,
+    getTaskById
 }
