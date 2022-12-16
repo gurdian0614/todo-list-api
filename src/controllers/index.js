@@ -39,9 +39,16 @@ const updateTask = async (req, res) => {
     });
 }
 
+const deleteTask = async (req, res) => {
+    const response = await pool.query('DELETE FROM task WHERE id = $1', [req.params.id]);
+    res.status(200).json({
+        message: 'User deleted succesfully'
+    });
+}
 module.exports = {
     getTasks,
     getTaskById,
     createTask,
-    updateTask
+    updateTask,
+    deleteTask
 }
